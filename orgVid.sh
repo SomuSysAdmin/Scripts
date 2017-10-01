@@ -25,6 +25,8 @@ else
 	baseDir="$1"
 fi
 
+cd "$baseDir" || echoErr "Error switching to $baseDir"
+
 # Now finding each file and creating Module folders, Chapter sub-folders and finally placing the individual files
 #	on the basis of that logic in the subfolders.
 
