@@ -1,0 +1,14 @@
+To connect to a server we use the \verb|ssh| command. The Syntax is: \verb|ssh <server-ip>|.
+
+\begin{minted}{console}
+$ ssh 192.168.152.129
+somu@192.168.152.129's password:
+Last login: Mon Nov 13 12:37:26 2017 from 192.168.152.128
+\end{minted}
+
+The default SSH port is \textbf{22}. To connect to SSH on a different port (common when server is exposed to the internet), is \verb|ssh -p <port-number> <server-ip>|. Note that \textit{if root login is disabled on the server,} we must also provide the username to login as. The syntax then becomes : \verb|ssh -p <port-number> <username>@<server-ip>|.
+
+\begin{minted}{console}
+$ ssh -p 2022 sander@ldap.rhatcertification.com
+\end{minted}
+
