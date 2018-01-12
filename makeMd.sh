@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ### Turns .LaTeX files to Markdown files (Github-Flavoured Markdown)
+## Typical Usage:
 
 # Defining custom Constants & functions
 RED='\033[1;31m'
@@ -32,28 +33,44 @@ echoCol() {
 	echo -e "${COL}$2${NC}$3"
 }
 
-# Setting the base directory
-if [ "$#" -lt 1 ]; then
-	baseDir="$(pwd)"
-	copyDir="/vm/markdown_notes"
-elif [ "$#" -lt 2 ]; then
-	baseDir="$1"
-	copyDir="/vm/markdown_notes"
-else
-	baseDir="$1"
-	copyDir="$2"
-fi
+# Default Values
+baseDir="$(pwd)"
+copyDir="/vm/markdown_notes"
+pt="/vm/markdown_notes" 		# Location of the template for the Posts
+ds=$(date +"%Y-%m-%d")
 
-if [ "$3" = "--remove" ]; then
-	echoCol "3" "WARNING: " "Deleted contents of $copyDir"
-	rm -rf $copyDir/*
-fi
+# Processing the Arguments
+while getopts ":b:c:d:rp:t:" opt; do	# -r doesn't use an argument
+	case $opt in
+		b)	baseDir="$OPTARG"
+		;;
+		c)	copyDir="$OPTARG"
+		;;
+		d)	# Set date to provided date
+			ds="$OPTARG"
+		;;
+		r)	echoCol "3" "WARNING: " "Deleted contents of $copyDir"
+			rm -rf $copyDir/*
+		;;
+		p)	pt="$OPTARG"
+		;;
+		t)	tagOrg="$OPTARG" # Common tags for all files in the folder
+			tagOrg=$(echo "$tagOrg" | sed -E "s|(\w+)|'\1\'|g")
+		;;
+		\?)	echo "Invalid option -$OPTARG" >&2
+		;;
+	esac
+done
 
 echo "Basedir: $baseDir"
 echo "Copydir: $copyDir"
-subGroup=$(echo "$baseDir" | sed -E "s|.*\/(.*)|\1|g")
+prev=""
+prevFile=""
+
+subGroup=$(echo "$baseDir" | sed -E "s|.*\/(.*)|\1|g") || echoErr "Couldn't obtain subGroup for $baseDir"
 mkdir "$copyDir/$subGroup" || echoErr "Error creating directory $subGroup @ $copyDir"
-echoCol 4 "Info: " "Created Directory ${BLUE}$copyDir/$subGroup${NC}"
+mkdir "$copyDir/_posts" || echoErr "Error creating the blog post directory $copyDir/_posts"
+#echoCol 4 "Info: " "Created Directory ${BLUE}$copyDir/$subGroup${NC}"
 
 # Copying all directories, and translating all files from LaTeX to Markdown using Pandoc
 function traverse() {
@@ -62,30 +79,37 @@ function traverse() {
 	    [ "$f" = "$1" ] && continue
 		if [ -d "$f" ]; then
         	# echo "** Directory $f **"
-			relpath=$(echo "$f" | sed -E "s|$baseDir||g")
+			relpath=$(echo "$f" | sed -E "s|$baseDir||g") || echoErr "Couldn't seperate $baseDir from $f"
 			relpath="$subGroup$relpath"
 			#echo "f = $f"
 			#echo "Relpath = $relpath"
 			location="$copyDir/$relpath"
 			#echo "Copydir+Relpath = $location"
-			location=$(echo "$location" | sed -E "s|(.*)/chapters(.*)|\1\2|g")
+			location=$(echo "$location" | sed -E "s|(.*)/chapters(.*)|\1\2|g") || echoErr "Couldn't obtain remove '/chapter' from $location"
 			#echo "Location = $location"
 			mkdir "$location" || echo -e "${RED}ERROR:${NC} Can't create directory $location"
-			echoCol 4 "Info: " "Created Directory ${BLUE}$location${NC}"
+			#echoCol 4 "Info: " "Created Directory ${BLUE}$location${NC}"
         	traverse "$f"
     	else
 			# Making the Chapter Heading from file name :
-			pre=$(numExt "$f")
-			name=$(echo "$f" | sed -En "s/.*\/chapters\/([[:digit:]]+\.)([[:digit:]]+) (.*).tex/\3/pg")
+			mod=$(numExt "$f" 1)
+			pre=$(numExt "$f" 2)
+			name=$(numExt "$f" 3)
+			modName=$(numExt "$f" 4)
+
 			if [ -n "$name" ]; then # if a valid texfile within the `chapters` Directory is found
         		# echo "$f"
 				# echoCol 3 "├─Prefix : " "$pre"
-				name=$(echo "$name" | tr '/' '-')
-				name=$(echo "Chapter $pre. $name")
-				echoCol 2 "$name" ""
+				nameOrg="$name"
+				name=$(echo "$name" | tr '/' '-')	# Optional - Converting any stray '/'s in the name to '-'
+				name=$(echo "$pre. $name")			# Attaching the chapter number to the chapter name
+				echoCol 2 "Chapter $name" ""
 				#echo "$name"
 				mkdir "$location/$name" || echoErr "Can't create directory $name @ $location"
-				echoCol 4 "Info: " "Created Directory ${BLUE}$location/$name${NC}"
+				#echoCol 4 "Info: " "Created Directory ${BLUE}$location/$name${NC}"
+
+				fullName=""
+				next="<*nextPointer>"
 
 				# Analyzing File `$f` to find sections and name them :
 				count=0
@@ -93,32 +117,71 @@ function traverse() {
 				while read -r line
 				do
 					# Checking if the current line is a section.
-				    head=$(echo -ne "$line" | sed -nE "s/\\\section\{(.*)\}/\1\n/gp")
-			    	head=$(echo -n "$head" | sed -E "s/\\\_/_/g")
-			    	head=$(echo -n "$head" | sed -E "s/\n//g")
+				    head=$(echo -ne "$line" | sed -nE "s/\\\section\{(.*)\}/\1\n/gp") || echoErr "Couldn't obtain section name from $line"
+			    	head=$(echo -n "$head" | sed -E "s/\\\_/_/g") || echoErr "Couldn't remove _'s from $line"
+			    	head=$(echo -n "$head" | sed -E "s/\n//g") || echoErr "Couldn't remove newlines name from $line"
 					if [ -n "$head" ]; then
+
+						tags="$tagOrg, '$modName', '$nameOrg', '$headSpc'"
+
+						# Creating the markdown file for the data stored presently in temp.tex with the present $fullName value
+						## The values of $prev and $next are used here by mkGfm() as well
 						[ -s temp.tex ] && mkGfm "$location/$name/$fullName"
+
+						# Updating the nav order : next remians a placeholder and is thus unchanged
+						prev=$(fileNameGen)
+
+						# Setting up values for the current heading
+						headSpc="$head"
+						head=$(echo "$head" | tr '/' '-')
 						count=$(( $count+1 ))
 						fullName="$count. $head"
-						fullName=$(echo "$fullName" | tr '/' '-')
-					    echoCol 4 "  $fullName" ""
+						lessonID="$mod.$pre.$count"		# In the format Module.Chapter.Section
+					    echoCol 4 "  $fullName" " --> ${BLUE}[${lessonID}]${NC}"
 					elif [ $count -gt 0 ]; then
 						echo "$line" >> temp.tex
 					fi
 				done < "$f"
+				tags="$tagOrg, '$modName', '$nameOrg', '$headSpc'"
 				[ -s temp.tex ] && mkGfm "$location/$name/$fullName"
+				prev=$(fileNameGen)	# Link should be maintained across modules
 			fi
-	   	fi
+		fi
 	done
 }
 
 # Number Extractor function
 function numExt() {
 	# Input is the absolute path of file
-	# Output is the Correct number of file.
+	# Output is :
+	# Args		Output
+	# ====		======
+	#  1		Module number of the file.
+	#  2		Correct chapter number of file.
+	#  3		Name of the file.
+	#  4		Module name.
 
-	num=$(echo "$1" | sed -En "s/.*\/chapters\/([[:digit:]]+\.)([[:digit:]]+) (.*).tex/\2/pg")
- 	echo $(( $num-1 ))
+	case "$2" in
+		1)	out=$(echo "$1" | sed -En "s/.*\/chapters\/([[:digit:]]+)\.([[:digit:]]+) (.*)\.tex/\1/pg") || echoErr "Couldn't obtain Mod number for $1"
+			;;
+		2)	out=$(echo "$1" | sed -En "s/.*\/chapters\/([[:digit:]]+\.)([[:digit:]]+) (.*)\.tex/\2/pg") || echoErr "Couldn't obtain Chapter number for $1"
+			out=$(( $out-1 ))
+			;;
+		3)	out=$(echo "$1" | sed -En "s/.*\/chapters\/([[:digit:]]+\.)([[:digit:]]+) (.*)\.tex/\3/pg") || echoErr "Couldn't obtain Chapter name for $1"
+			;;
+		4)	out=$(echo "$1" | sed -En "s|.*\/[[:digit:]]+\. (.*)/chapters\/.*\.tex|\1|pg") || echoErr "Couldn't obtain Mod name for $1"
+			;;
+	esac
+
+	echo "$out"
+}
+
+function fileNameGen () {
+	# Formatting the new file using only $headSpc and $ds
+	title=$(echo "$headSpc" | tr ' ' '-')
+	title=$(echo "$title" | tr '[:upper:]' '[:lower:]')
+	title=$(echo "$title" | tr '/' '-')
+	[ -n "$title" ] && echo -n "$ds-$title"
 }
 
 function mkGfm () {
@@ -131,8 +194,60 @@ function mkGfm () {
 		cat temp.tex
 		exit
 	fi
-	echo -n "" > temp.tex
+
+	# Generating the formatted new file.
+	title=$(fileNameGen)
+	[ -n "$fileName" ] && prevFile="$fileName"	#	Actually stores the old filepath
+	fileName="$title.md"
+
+	# Removing Unchanged (leftover) LaTeX code.
+	perl -0777 -pe 's!(\\vspace|\\centering).*\R+!!g' "$1.md" > temp.md
+	cat temp.md > "$1.md"
+
+	# Auto-generating the file from template
+	touch "$copyDir/_posts/$fileName" || echoErr "Couldn't create the file $fileName @ $copyDir/_posts"
+	fileName="$copyDir/_posts/$fileName"
+	cat "$pt/post.template" > "$fileName"
+	sed -i "s|''|'$headSpc'|g" "$fileName" || echoErr "Can't Insert MetaData -- title for $fileName"
+	sed -i "s|\[\]|\[$tags\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
+	#modSlug=$(echo "$modName" | tr ' ', '-' | tr '[:upper:]' '[:lower:]')
+	sed -i "s|'<\*categories>'|\[$tagOrg, '$modName'\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
+	sed -i "s|<\*lessonID>|$lessonID|g" "$fileName" || echoErr "Can't Insert MetaData -- lessonID for $fileName"
+	sed -i "s|'<\*mod>'|\'$modName\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Mod Name for $fileName"
+	sed -i "s|'<\*chapter>'|\'$nameOrg\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Chapter Name for $fileName"
+	nav=$(linkMaker "$prev" "$next")
+	sed -i "s|<\*navbox>|$nav|g" "$fileName" || echoErr "Can't Insert MetaData -- Navbox for $fileName\n\n$nav\n"
+
+	# Inserting the actual post in the file
+	cat "$1.md" >> "$fileName" || echoErr "File couldn't be Created!"
+
+	# Replacing the navbox.next_article in $prev.md with the name of the current file
+	if [ -n "$prevFile" ]; then
+		sed -E "s|<\*nextPointer>|$title|g" -i "$prevFile" || echoErr "Couldn't replace nextPointer placeholder for '$prevFile' with $title"
+	fi
+
+	# Cleaning up the temp files.
+	rm -f temp.tex temp.md
 }
 
-traverse $baseDir
+function linkMaker {
+	prev_article="$1"
+	next_article="$2"
+
+	if [ -z "$prev_article" ]; then prev_article="#  prev_article: \n"; else
+		prev_article="  prev_article: '$prev_article'\n"
+	fi
+
+	if [ -z "$next_article" ]; then next_article="#  next_article: \n"; else
+		next_article="  next_article: '$next_article'"
+	fi
+
+	navbox="navbox:\n$prev_article$next_article"
+	echo "$navbox"
+}
+
+traverse "$baseDir"
+
+# Setting the next pointer of the last file to nothing
+sed -i "s|  next_article: '<\*nextPointer>'|#  next_article: ''|g" "$fileName" || echoErr "Last file $fileName's next pointer couldn't be set to nil"
 echo "Complete!"
