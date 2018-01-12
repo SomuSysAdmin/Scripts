@@ -210,8 +210,8 @@ function mkGfm () {
 	cat "$pt/post.template" > "$fileName"
 	sed -i "s|''|'$headSpc'|g" "$fileName" || echoErr "Can't Insert MetaData -- title for $fileName"
 	sed -i "s|\[\]|\[$tags\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
-	#modSlug=$(echo "$modName" | tr ' ', '-' | tr '[:upper:]' '[:lower:]')
-	sed -i "s|'<\*categories>'|\[$tagOrg, '$modName'\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
+	modSlug=$(echo "$modName" | tr ' ', '-' | tr '[:upper:]' '[:lower:]')
+	sed -i "s|'<\*categories>'|\[$tagOrg, '$modSlug'\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
 	sed -i "s|<\*lessonID>|$lessonID|g" "$fileName" || echoErr "Can't Insert MetaData -- lessonID for $fileName"
 	sed -i "s|'<\*mod>'|\'$modName\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Mod Name for $fileName"
 	sed -i "s|'<\*chapter>'|\'$nameOrg\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Chapter Name for $fileName"
