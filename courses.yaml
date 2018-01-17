@@ -1,0 +1,827 @@
+##  description and a contents section that contains the sub-categories or files. Files should have their content set
+##  as false. The sub-categories however, should contain all sub-category and file nodes within this object.
+
+# The template for a node in the list:
+
+# - id:
+#   name: ''
+#   permalink:
+#   descrition: ''
+#   content:
+
+courses:
+  - id: 1
+    name: 'RHCSA'
+    permalink: 'rhcsa'
+    description: '<*description>'
+    content:
+      - id: 1.1
+        name: 'Installing RHEL Server'
+        permalink: '/rhcsa/installing-rhel-server'
+        description: '<*description>'
+        content:
+          - id: 1.1.1
+            name: 'Using Essential Tools'
+            permalink: '/rhcsa/installing-rhel-server/using-essential-tools'
+            description: '<*description>'
+            content:
+              - id: 1.1.1.1
+                name: 'Man Command'
+                permalink: '/rhcsa/installing-rhel-server/using-essential-tools/man-command'
+                description: '<*description>'
+                content:
+              - id: 1.1.1.2
+                name: 'Understanding Globbing and Wildcards'
+                permalink: '/rhcsa/installing-rhel-server/using-essential-tools/understanding-globbing-and-wildcards'
+                description: '<*description>'
+                content:
+              - id: 1.1.1.3
+                name: 'Using Globbing and Wildcards'
+                permalink: '/rhcsa/installing-rhel-server/using-essential-tools/using-globbing-and-wildcards'
+                description: '<*description>'
+                content:
+              - id: 1.1.1.4
+                name: 'Understanding I/O Redirection and Pipes'
+                permalink: '/rhcsa/installing-rhel-server/using-essential-tools/understanding-i-o-redirection-and-pipes'
+                description: '<*description>'
+                content:
+              - id: 1.1.1.5
+                name: 'Using I/O Redireciton and Piping'
+                permalink: '/rhcsa/installing-rhel-server/using-essential-tools/using-i-o-redireciton-and-piping'
+                description: '<*description>'
+                content:
+          - id: 1.1.2
+            name: 'Essential File Management Tools'
+            permalink: '/rhcsa/installing-rhel-server/essential-file-management-tools'
+            description: '<*description>'
+            content:
+              - id: 1.1.2.1
+                name: 'Understanding Linux File System Layout'
+                permalink: '/rhcsa/installing-rhel-server/essential-file-management-tools/understanding-linux-file-system-layout'
+                description: '<*description>'
+                content:
+              - id: 1.1.2.2
+                name: 'Finding Files'
+                permalink: '/rhcsa/installing-rhel-server/essential-file-management-tools/finding-files'
+                description: '<*description>'
+                content:
+              - id: 1.1.2.3
+                name: 'Understanding Links'
+                permalink: '/rhcsa/installing-rhel-server/essential-file-management-tools/understanding-links'
+                description: '<*description>'
+                content:
+              - id: 1.1.2.4
+                name: 'Working with Links'
+                permalink: '/rhcsa/installing-rhel-server/essential-file-management-tools/working-with-links'
+                description: '<*description>'
+                content:
+              - id: 1.1.2.5
+                name: 'Working with tar'
+                permalink: '/rhcsa/installing-rhel-server/essential-file-management-tools/working-with-tar'
+                description: '<*description>'
+                content:
+          - id: 1.1.3
+            name: 'Working with Text Files'
+            permalink: '/rhcsa/installing-rhel-server/working-with-text-files'
+            description: '<*description>'
+            content:
+              - id: 1.1.3.1
+                name: 'Understanding Regular Expressions'
+                permalink: '/rhcsa/installing-rhel-server/working-with-text-files/understanding-regular-expressions'
+                description: '<*description>'
+                content:
+              - id: 1.1.3.2
+                name: 'Using common text tools'
+                permalink: '/rhcsa/installing-rhel-server/working-with-text-files/using-common-text-tools'
+                description: '<*description>'
+                content:
+              - id: 1.1.3.3
+                name: 'grep'
+                permalink: '/rhcsa/installing-rhel-server/working-with-text-files/grep'
+                description: '<*description>'
+                content:
+              - id: 1.1.3.4
+                name: 'sed and awk basics'
+                permalink: '/rhcsa/installing-rhel-server/working-with-text-files/sed-and-awk-basics'
+                description: '<*description>'
+                content:
+          - id: 1.1.4
+            name: 'Connecting to a RHEL Server'
+            permalink: '/rhcsa/installing-rhel-server/connecting-to-a-rhel-server'
+            description: '<*description>'
+            content:
+              - id: 1.1.4.1
+                name: 'Connecting to a Server with SSH'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-rhel-server/connecting-to-a-server-with-ssh'
+                description: '<*description>'
+                content:
+              - id: 1.1.4.2
+                name: 'RSA Key fingerprint and known hosts'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-rhel-server/rsa-key-fingerprint-and-known-hosts'
+                description: '<*description>'
+                content:
+              - id: 1.1.4.3
+                name: 'sshd_config'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-rhel-server/sshd_config'
+                description: '<*description>'
+                content:
+              - id: 1.1.4.4
+                name: 'Understanding SSH keys'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-rhel-server/understanding-ssh-keys'
+                description: '<*description>'
+                content:
+              - id: 1.1.4.5
+                name: 'Using SSH Keys'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-rhel-server/using-ssh-keys'
+                description: '<*description>'
+                content:
+          - id: 1.1.5
+            name: 'Managing Users and Groups'
+            permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups'
+            description: '<*description>'
+            content:
+              - id: 1.1.5.1
+                name: 'Understanding the need for Users'
+                permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups/understanding-the-need-for-users'
+                description: '<*description>'
+                content:
+              - id: 1.1.5.2
+                name: 'User Properties'
+                permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups/user-properties'
+                description: '<*description>'
+                content:
+              - id: 1.1.5.3
+                name: 'Creating and Managing Users'
+                permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups/creating-and-managing-users'
+                description: '<*description>'
+                content:
+              - id: 1.1.5.4
+                name: 'Understanding Group Membership'
+                permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups/understanding-group-membership'
+                description: '<*description>'
+                content:
+              - id: 1.1.5.5
+                name: 'Creating and Managing Groups'
+                permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups/creating-and-managing-groups'
+                description: '<*description>'
+                content:
+              - id: 1.1.5.6
+                name: 'User and Group configuration files'
+                permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups/user-and-group-configuration-files'
+                description: '<*description>'
+                content:
+              - id: 1.1.5.7
+                name: 'Managing Password properties'
+                permalink: '/rhcsa/installing-rhel-server/managing-users-and-groups/managing-password-properties'
+                description: '<*description>'
+                content:
+          - id: 1.1.6
+            name: 'Connecting to a LDAP Server'
+            permalink: '/rhcsa/installing-rhel-server/connecting-to-a-ldap-server'
+            description: '<*description>'
+            content:
+              - id: 1.1.6.1
+                name: 'Understanding LDAP'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-ldap-server/understanding-ldap'
+                description: '<*description>'
+                content:
+              - id: 1.1.6.2
+                name: 'Telling your server where to find the LDAP Server'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-ldap-server/telling-your-server-where-to-find-the-ldap-server'
+                description: '<*description>'
+                content:
+              - id: 1.1.6.3
+                name: 'Understanding Automount'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-ldap-server/understanding-automount'
+                description: '<*description>'
+                content:
+              - id: 1.1.6.4
+                name: 'Configuring Automount'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-ldap-server/configuring-automount'
+                description: '<*description>'
+                content:
+              - id: 1.1.6.5
+                name: 'Configuring NFS and Automount'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-ldap-server/configuring-nfs-and-automount'
+                description: '<*description>'
+                content:
+              - id: 1.1.6.6
+                name: 'Modifying nslcd Configuration'
+                permalink: '/rhcsa/installing-rhel-server/connecting-to-a-ldap-server/modifying-nslcd-configuration'
+                description: '<*description>'
+                content:
+          - id: 1.1.7
+            name: 'Managing Permissions'
+            permalink: '/rhcsa/installing-rhel-server/managing-permissions'
+            description: '<*description>'
+            content:
+              - id: 1.1.7.1
+                name: 'Understanding Ownership: Users, Groups and Others'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/understanding-ownership:-users,-groups-and-others'
+                description: '<*description>'
+                content:
+              - id: 1.1.7.2
+                name: 'Changing file ownership'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/changing-file-ownership'
+                description: '<*description>'
+                content:
+              - id: 1.1.7.3
+                name: 'Understanding Basic Permissions'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/understanding-basic-permissions'
+                description: '<*description>'
+                content:
+              - id: 1.1.7.4
+                name: 'Managing Basic Permissions'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/managing-basic-permissions'
+                description: '<*description>'
+                content:
+              - id: 1.1.7.5
+                name: 'Understanding Special Permissions'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/understanding-special-permissions'
+                description: '<*description>'
+                content:
+              - id: 1.1.7.6
+                name: 'Managing Special Permissions'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/managing-special-permissions'
+                description: '<*description>'
+                content:
+              - id: 1.1.7.7
+                name: 'Understanding ACLs'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/understanding-acls'
+                description: '<*description>'
+                content:
+              - id: 1.1.7.8
+                name: 'Managing ACLs'
+                permalink: '/rhcsa/installing-rhel-server/managing-permissions/managing-acls'
+                description: '<*description>'
+                content:
+          - id: 1.1.8
+            name: 'Configuring Networking'
+            permalink: '/rhcsa/installing-rhel-server/configuring-networking'
+            description: '<*description>'
+            content:
+              - id: 1.1.8.1
+                name: 'Understanding NIC Naming'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/understanding-nic-naming'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.2
+                name: 'Managing NIC Configuration with ip Command'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/managing-nic-configuration-with-ip-command'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.3
+                name: 'Storing Network Configuration persistently'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/storing-network-configuration-persistently'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.4
+                name: 'Understanding Network Manager'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/understanding-network-manager'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.5
+                name: 'Using Network Manager utilities (nmcli, nmtui)'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/using-network-manager-utilities-(nmcli,-nmtui)'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.6
+                name: 'Understanding Routing and DNS'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/understanding-routing-and-dns'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.7
+                name: 'Configuring Routing and DNS'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/configuring-routing-and-dns'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.8
+                name: 'Understanding Network Analysis Tools'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/understanding-network-analysis-tools'
+                description: '<*description>'
+                content:
+              - id: 1.1.8.9
+                name: 'Using Network Analysis Tools'
+                permalink: '/rhcsa/installing-rhel-server/configuring-networking/using-network-analysis-tools'
+                description: '<*description>'
+                content:
+      - id: 1.2
+        name: 'Operating RHEL Servers'
+        permalink: '/rhcsa/operating-rhel-servers'
+        description: '<*description>'
+        content:
+          - id: 1.2.9
+            name: 'Managing Processes'
+            permalink: '/rhcsa/operating-rhel-servers/managing-processes'
+            description: '<*description>'
+            content:
+              - id: 1.2.9.1
+                name: 'Understanding Jobs and Processes'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/understanding-jobs-and-processes'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.2
+                name: 'Managing Shell Jobs'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/managing-shell-jobs'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.3
+                name: 'Getting process information with ps'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/getting-process-information-with-ps'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.4
+                name: 'Understanding Memory Usage'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/understanding-memory-usage'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.5
+                name: 'Understanding Performance Load'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/understanding-performance-load'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.6
+                name: 'Monitoring System Activity with top'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/monitoring-system-activity-with-top'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.7
+                name: 'Sending Signals to processes'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/sending-signals-to-processes'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.8
+                name: 'Understanding Priorities and Niceness'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/understanding-priorities-and-niceness'
+                description: '<*description>'
+                content:
+              - id: 1.2.9.9
+                name: 'Changing Process Nice values'
+                permalink: '/rhcsa/operating-rhel-servers/managing-processes/changing-process-nice-values'
+                description: '<*description>'
+                content:
+          - id: 1.2.10
+            name: 'Managing Software'
+            permalink: '/rhcsa/operating-rhel-servers/managing-software'
+            description: '<*description>'
+            content:
+              - id: 1.2.10.1
+                name: 'Understanding Meta Package Handlers'
+                permalink: '/rhcsa/operating-rhel-servers/managing-software/understanding-meta-package-handlers'
+                description: '<*description>'
+                content:
+              - id: 1.2.10.2
+                name: 'Setting up Yum repositories'
+                permalink: '/rhcsa/operating-rhel-servers/managing-software/setting-up-yum-repositories'
+                description: '<*description>'
+                content:
+              - id: 1.2.10.3
+                name: 'Using the yum command'
+                permalink: '/rhcsa/operating-rhel-servers/managing-software/using-the-yum-command'
+                description: '<*description>'
+                content:
+              - id: 1.2.10.4
+                name: 'Using rpm queries'
+                permalink: '/rhcsa/operating-rhel-servers/managing-software/using-rpm-queries'
+                description: '<*description>'
+                content:
+          - id: 1.2.11
+            name: 'Working with Virtual Machines'
+            permalink: '/rhcsa/operating-rhel-servers/working-with-virtual-machines'
+            description: '<*description>'
+            content:
+              - id: 1.2.11.1
+                name: 'Introducing KVM Virtualization'
+                permalink: '/rhcsa/operating-rhel-servers/working-with-virtual-machines/introducing-kvm-virtualization'
+                description: '<*description>'
+                content:
+              - id: 1.2.11.2
+                name: 'Managing Libvirt and KVM'
+                permalink: '/rhcsa/operating-rhel-servers/working-with-virtual-machines/managing-libvirt-and-kvm'
+                description: '<*description>'
+                content:
+              - id: 1.2.11.3
+                name: 'Using virsh'
+                permalink: '/rhcsa/operating-rhel-servers/working-with-virtual-machines/using-virsh'
+                description: '<*description>'
+                content:
+              - id: 1.2.11.4
+                name: 'Using virt-manager'
+                permalink: '/rhcsa/operating-rhel-servers/working-with-virtual-machines/using-virt-manager'
+                description: '<*description>'
+                content:
+          - id: 1.2.12
+            name: 'Scheduling Tasks'
+            permalink: '/rhcsa/operating-rhel-servers/scheduling-tasks'
+            description: '<*description>'
+            content:
+              - id: 1.2.12.1
+                name: 'Cron vs at'
+                permalink: '/rhcsa/operating-rhel-servers/scheduling-tasks/cron-vs-at'
+                description: '<*description>'
+                content:
+              - id: 1.2.12.2
+                name: 'Understanding Cron Configuration files and Execution times'
+                permalink: '/rhcsa/operating-rhel-servers/scheduling-tasks/understanding-cron-configuration-files-and-execution-times'
+                description: '<*description>'
+                content:
+              - id: 1.2.12.3
+                name: 'Scheduling with cron'
+                permalink: '/rhcsa/operating-rhel-servers/scheduling-tasks/scheduling-with-cron'
+                description: '<*description>'
+                content:
+              - id: 1.2.12.4
+                name: 'Using at'
+                permalink: '/rhcsa/operating-rhel-servers/scheduling-tasks/using-at'
+                description: '<*description>'
+                content:
+          - id: 1.2.13
+            name: 'Configuring Logging'
+            permalink: '/rhcsa/operating-rhel-servers/configuring-logging'
+            description: '<*description>'
+            content:
+              - id: 1.2.13.1
+                name: 'Understanding rsyslogd and journald logging'
+                permalink: '/rhcsa/operating-rhel-servers/configuring-logging/understanding-rsyslogd-and-journald-logging'
+                description: '<*description>'
+                content:
+              - id: 1.2.13.2
+                name: 'Integrating rsyslogd and journald'
+                permalink: '/rhcsa/operating-rhel-servers/configuring-logging/integrating-rsyslogd-and-journald'
+                description: '<*description>'
+                content:
+              - id: 1.2.13.3
+                name: 'Configuring rsyslog logging'
+                permalink: '/rhcsa/operating-rhel-servers/configuring-logging/configuring-rsyslog-logging'
+                description: '<*description>'
+                content:
+              - id: 1.2.13.4
+                name: 'Working with journald'
+                permalink: '/rhcsa/operating-rhel-servers/configuring-logging/working-with-journald'
+                description: '<*description>'
+                content:
+              - id: 1.2.13.5
+                name: 'Understanding logrotate'
+                permalink: '/rhcsa/operating-rhel-servers/configuring-logging/understanding-logrotate'
+                description: '<*description>'
+                content:
+              - id: 1.2.13.6
+                name: 'Configuring logrotate'
+                permalink: '/rhcsa/operating-rhel-servers/configuring-logging/configuring-logrotate'
+                description: '<*description>'
+                content:
+          - id: 1.2.14
+            name: 'Managing Partitions'
+            permalink: '/rhcsa/operating-rhel-servers/managing-partitions'
+            description: '<*description>'
+            content:
+              - id: 1.2.14.1
+                name: 'Understanding Disk Layout'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/understanding-disk-layout'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.2
+                name: 'Creating Partitions'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/creating-partitions'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.3
+                name: 'Understanding File System Differences'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/understanding-file-system-differences'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.4
+                name: 'Making the File System'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/making-the-file-system'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.5
+                name: 'Mounting the Partition Manually'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/mounting-the-partition-manually'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.6
+                name: 'Understanding /etc/fstab'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/understanding--etc-fstab'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.7
+                name: 'Mounting partitions via /etc/fstab'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/mounting-partitions-via--etc-fstab'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.8
+                name: 'Understanding Encrypted Partitions'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/understanding-encrypted-partitions'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.9
+                name: 'Creating a LUKS Encrypted Partition'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/creating-a-luks-encrypted-partition'
+                description: '<*description>'
+                content:
+              - id: 1.2.14.10
+                name: 'Dealing with "Enter root password for maintenance mode"'
+                permalink: '/rhcsa/operating-rhel-servers/managing-partitions/dealing-with-"enter-root-password-for-maintenance-mode"'
+                description: '<*description>'
+                content:
+          - id: 1.2.15
+            name: 'Managing LVM Logical Volumes'
+            permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes'
+            description: '<*description>'
+            content:
+              - id: 1.2.15.1
+                name: 'Why use LVM'
+                permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes/why-use-lvm'
+                description: '<*description>'
+                content:
+              - id: 1.2.15.2
+                name: 'Understanding LVM Setup'
+                permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes/understanding-lvm-setup'
+                description: '<*description>'
+                content:
+              - id: 1.2.15.3
+                name: 'Creating an LVM Logical Volume'
+                permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes/creating-an-lvm-logical-volume'
+                description: '<*description>'
+                content:
+              - id: 1.2.15.4
+                name: 'Understanding Device Mapper and LVM Device Names'
+                permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes/understanding-device-mapper-and-lvm-device-names'
+                description: '<*description>'
+                content:
+              - id: 1.2.15.5
+                name: 'Understanding LVM resize operations'
+                permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes/understanding-lvm-resize-operations'
+                description: '<*description>'
+                content:
+              - id: 1.2.15.6
+                name: 'Growing an LVM Logical Volume'
+                permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes/growing-an-lvm-logical-volume'
+                description: '<*description>'
+                content:
+              - id: 1.2.15.7
+                name: 'Shrinking an LVM logical Volume'
+                permalink: '/rhcsa/operating-rhel-servers/managing-lvm-logical-volumes/shrinking-an-lvm-logical-volume'
+                description: '<*description>'
+                content:
+      - id: 1.3
+        name: 'Performing Advanced System Administration Tasks'
+        permalink: '/rhcsa/performing-advanced-system-administration-tasks'
+        description: '<*description>'
+        content:
+          - id: 1.3.16
+            name: 'Managing the Kernel'
+            permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-the-kernel'
+            description: '<*description>'
+            content:
+              - id: 1.3.16.1
+                name: 'Understanding the Modular Structure of the Kernel'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-the-kernel/understanding-the-modular-structure-of-the-kernel'
+                description: '<*description>'
+                content:
+              - id: 1.3.16.2
+                name: 'Working with Kernel Modules'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-the-kernel/working-with-kernel-modules'
+                description: '<*description>'
+                content:
+              - id: 1.3.16.3
+                name: 'Modifying the Kernel module behavior through modprobe'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-the-kernel/modifying-the-kernel-module-behavior-through-modprobe'
+                description: '<*description>'
+                content:
+              - id: 1.3.16.4
+                name: 'Tuning kernel behavior through proc'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-the-kernel/tuning-kernel-behavior-through-proc'
+                description: '<*description>'
+                content:
+              - id: 1.3.16.5
+                name: 'Using sysctl'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-the-kernel/using-sysctl'
+                description: '<*description>'
+                content:
+              - id: 1.3.16.6
+                name: 'Updating the kernel'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-the-kernel/updating-the-kernel'
+                description: '<*description>'
+                content:
+          - id: 1.3.17
+            name: 'Using Kickstart'
+            permalink: '/rhcsa/performing-advanced-system-administration-tasks/using-kickstart'
+            description: '<*description>'
+            content:
+              - id: 1.3.17.1
+                name: 'Understanding Kickstart Usage'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/using-kickstart/understanding-kickstart-usage'
+                description: '<*description>'
+                content:
+              - id: 1.3.17.2
+                name: 'Creating a Kickstart file'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/using-kickstart/creating-a-kickstart-file'
+                description: '<*description>'
+                content:
+              - id: 1.3.17.3
+                name: 'Using the Kickstart file for Automatic installations'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/using-kickstart/using-the-kickstart-file-for-automatic-installations'
+                description: '<*description>'
+                content:
+              - id: 1.3.17.4
+                name: 'Using Kickstart files in fully automated data-centers'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/using-kickstart/using-kickstart-files-in-fully-automated-data-centers'
+                description: '<*description>'
+                content:
+          - id: 1.3.18
+            name: 'Managing and Understanding the Boot Procedure'
+            permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure'
+            description: '<*description>'
+            content:
+              - id: 1.3.18.1
+                name: 'Boot Procedure Generic Overview'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/boot-procedure-generic-overview'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.2
+                name: 'Understanding Grub2'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/understanding-grub2'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.3
+                name: 'Modifying Grub2 Parameters'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/modifying-grub2-parameters'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.4
+                name: 'Understanding Systemd'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/understanding-systemd'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.5
+                name: 'Managing Services in a systemd Environment'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/managing-services-in-a-systemd-environment'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.6
+                name: 'Understanding systemd Targets'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/understanding-systemd-targets'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.7
+                name: 'Switching between systemd Targets'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/switching-between-systemd-targets'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.8
+                name: 'Managing File System mounts in a systemd Environment'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/managing-file-system-mounts-in-a-systemd-environment'
+                description: '<*description>'
+                content:
+              - id: 1.3.18.9
+                name: 'Managing Automount in a systemd Environment'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/managing-and-understanding-the-boot-procedure/managing-automount-in-a-systemd-environment'
+                description: '<*description>'
+                content:
+          - id: 1.3.19
+            name: 'Applying Essential Troubleshooting Skills'
+            permalink: '/rhcsa/performing-advanced-system-administration-tasks/applying-essential-troubleshooting-skills'
+            description: '<*description>'
+            content:
+              - id: 1.3.19.1
+                name: 'Making Grub Changes persistent'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/applying-essential-troubleshooting-skills/making-grub-changes-persistent'
+                description: '<*description>'
+                content:
+              - id: 1.3.19.2
+                name: 'Using rd.break to Reset the Root Password'
+                permalink: '/rhcsa/performing-advanced-system-administration-tasks/applying-essential-troubleshooting-skills/using-rd.break-to-reset-the-root-password'
+                description: '<*description>'
+                content:
+      - id: 1.4
+        name: 'Managing Network Services'
+        permalink: '/rhcsa/managing-network-services'
+        description: '<*description>'
+        content:
+          - id: 1.4.20
+            name: 'Managing HTTP Services'
+            permalink: '/rhcsa/managing-network-services/managing-http-services'
+            description: '<*description>'
+            content:
+              - id: 1.4.20.1
+                name: 'Understanding Apache Configuration'
+                permalink: '/rhcsa/managing-network-services/managing-http-services/understanding-apache-configuration'
+                description: '<*description>'
+                content:
+              - id: 1.4.20.2
+                name: 'Creating a Basic Web Site'
+                permalink: '/rhcsa/managing-network-services/managing-http-services/creating-a-basic-web-site'
+                description: '<*description>'
+                content:
+          - id: 1.4.21
+            name: 'Managing SELinux'
+            permalink: '/rhcsa/managing-network-services/managing-selinux'
+            description: '<*description>'
+            content:
+              - id: 1.4.21.1
+                name: 'Understanding the Need for SELinux'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/understanding-the-need-for-selinux'
+                description: '<*description>'
+                content:
+              - id: 1.4.21.2
+                name: 'Understanding SELinux Modes and Policy'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/understanding-selinux-modes-and-policy'
+                description: '<*description>'
+                content:
+              - id: 1.4.21.3
+                name: 'Understanding SELinux Lables and Booleans'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/understanding-selinux-lables-and-booleans'
+                description: '<*description>'
+                content:
+              - id: 1.4.21.4
+                name: 'Understanding File System Labels'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/understanding-file-system-labels'
+                description: '<*description>'
+                content:
+              - id: 1.4.21.5
+                name: 'Understanding semanage fcontext and chcon differences'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/understanding-semanage-fcontext-and-chcon-differences'
+                description: '<*description>'
+                content:
+              - id: 1.4.21.6
+                name: 'Using Booleans'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/using-booleans'
+                description: '<*description>'
+                content:
+              - id: 1.4.21.7
+                name: 'Analyzing SELinux Log Files'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/analyzing-selinux-log-files'
+                description: '<*description>'
+                content:
+              - id: 1.4.21.8
+                name: 'Configuring SELinux for Apache'
+                permalink: '/rhcsa/managing-network-services/managing-selinux/configuring-selinux-for-apache'
+                description: '<*description>'
+                content:
+          - id: 1.4.22
+            name: 'Configuring a Firewall'
+            permalink: '/rhcsa/managing-network-services/configuring-a-firewall'
+            description: '<*description>'
+            content:
+              - id: 1.4.22.1
+                name: 'Understanding Firewall Configuration'
+                permalink: '/rhcsa/managing-network-services/configuring-a-firewall/understanding-firewall-configuration'
+                description: '<*description>'
+                content:
+              - id: 1.4.22.2
+                name: 'Using Firewalld'
+                permalink: '/rhcsa/managing-network-services/configuring-a-firewall/using-firewalld'
+                description: '<*description>'
+                content:
+          - id: 1.4.23
+            name: 'Configuring FTP Services'
+            permalink: '/rhcsa/managing-network-services/configuring-ftp-services'
+            description: '<*description>'
+            content:
+              - id: 1.4.23.1
+                name: 'Understanding FTP Configuration'
+                permalink: '/rhcsa/managing-network-services/configuring-ftp-services/understanding-ftp-configuration'
+                description: '<*description>'
+                content:
+              - id: 1.4.23.2
+                name: 'Configuring an FTP Server for anonymous download'
+                permalink: '/rhcsa/managing-network-services/configuring-ftp-services/configuring-an-ftp-server-for-anonymous-download'
+                description: '<*description>'
+                content:
+          - id: 1.4.24
+            name: 'Configuring Time Services'
+            permalink: '/rhcsa/managing-network-services/configuring-time-services'
+            description: '<*description>'
+            content:
+              - id: 1.4.24.1
+                name: 'Understanding Time on Linux'
+                permalink: '/rhcsa/managing-network-services/configuring-time-services/understanding-time-on-linux'
+                description: '<*description>'
+                content:
+              - id: 1.4.24.2
+                name: 'Setting up a Chrony Time Server'
+                permalink: '/rhcsa/managing-network-services/configuring-time-services/setting-up-a-chrony-time-server'
+                description: '<*description>'
+                content:
+          - id: 1.4.25
+            name: 'Configuring VNC Access'
+            permalink: '/rhcsa/managing-network-services/configuring-vnc-access'
+            description: '<*description>'
+            content:
+              - id: 1.4.25.1
+                name: 'Understanding VNC'
+                permalink: '/rhcsa/managing-network-services/configuring-vnc-access/understanding-vnc'
+                description: '<*description>'
+                content:
+              - id: 1.4.25.2
+                name: 'Configuring a VNC Server'
+                permalink: '/rhcsa/managing-network-services/configuring-vnc-access/configuring-a-vnc-server'
+                description: '<*description>'
+                content:
+              - id: 1.4.25.3
+                name: 'Connecting to a VNC Server'
+                permalink: '/rhcsa/managing-network-services/configuring-vnc-access/connecting-to-a-vnc-server'
+                description: '<*description>'
+                content:

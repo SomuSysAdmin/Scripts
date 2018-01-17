@@ -40,7 +40,7 @@ pt="/vm/markdown_notes" 		# Location of the template for the Posts
 ds=$(date +"%Y-%m-%d")
 
 # Processing the Arguments
-while getopts ":b:c:d:rp:t:" opt; do	# -r doesn't use an argument
+while getopts ":b:c:d:rp:t:i:" opt; do	# -r doesn't use an argument
 	case $opt in
 		b)	baseDir="$OPTARG"
 		;;
@@ -54,10 +54,12 @@ while getopts ":b:c:d:rp:t:" opt; do	# -r doesn't use an argument
 		;;
 		p)	pt="$OPTARG"
 		;;
+		i)	courseID="$OPTARG"
+		;;
 		t)	tagOrg="$OPTARG" # Common tags for all files in the folder
 			tagOrg=$(echo "$tagOrg" | sed -E "s|(\w+)|'\1\'|g")
 		;;
-		\?)	echo "Invalid option -$OPTARG" >&2
+		\?)	echoErr "Invalid option -$OPTARG"
 		;;
 	esac
 done
@@ -176,11 +178,16 @@ function numExt() {
 	echo "$out"
 }
 
-function fileNameGen () {
-	# Formatting the new file using only $headSpc and $ds
-	title=$(echo "$headSpc" | tr ' ' '-')
+function slugify() {
+	title=$(echo "$1" | tr ' ' '-')
 	title=$(echo "$title" | tr '[:upper:]' '[:lower:]')
 	title=$(echo "$title" | tr '/' '-')
+	echo "$title"
+}
+
+function fileNameGen () {
+	# Formatting the new file using only $headSpc and $ds
+	title=$(slugify "$headSpc")
 	[ -n "$title" ] && echo -n "$ds-$title"
 }
 
@@ -210,8 +217,10 @@ function mkGfm () {
 	cat "$pt/post.template" > "$fileName"
 	sed -i "s|''|'$headSpc'|g" "$fileName" || echoErr "Can't Insert MetaData -- title for $fileName"
 	sed -i "s|\[\]|\[$tags\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
-	modSlug=$(echo "$modName" | tr ' ', '-' | tr '[:upper:]' '[:lower:]')
-	sed -i "s|'<\*categories>'|\[$tagOrg, '$modSlug'\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
+	baseSlug=$(slugify "$tagOrg")
+	modSlug=$(slugify "$modName")
+	chapSlug=$(slugify "$nameOrg")
+	sed -i "s|'<\*categories>'|\[$baseSlug, '$modSlug', '$chapSlug'\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
 	sed -i "s|<\*lessonID>|$lessonID|g" "$fileName" || echoErr "Can't Insert MetaData -- lessonID for $fileName"
 	sed -i "s|'<\*mod>'|\'$modName\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Mod Name for $fileName"
 	sed -i "s|'<\*chapter>'|\'$nameOrg\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Chapter Name for $fileName"
@@ -250,4 +259,9 @@ traverse "$baseDir"
 
 # Setting the next pointer of the last file to nothing
 sed -i "s|  next_article: '<\*nextPointer>'|#  next_article: ''|g" "$fileName" || echoErr "Last file $fileName's next pointer couldn't be set to nil"
+
+# Generating Datafile
+./makeData.sh -c "$tagOrg" -i "$courseID"
+
 echo "Complete!"
+echoCol 4 "The data to be added to ${YELLOW}_data/courses.yaml${BLUE} file is stored in: " "$datafile"
