@@ -38,9 +38,10 @@ baseDir="$(pwd)"
 copyDir="/vm/markdown_notes"
 pt="/vm/markdown_notes" 		# Location of the template for the Posts
 ds=$(date +"%Y-%m-%d")
+align="                  " 		# 18 spaces to align the options.
 
 # Processing the Arguments
-while getopts ":b:c:d:rp:t:i:" opt; do	# -r doesn't use an argument
+while getopts ":b:c:d:rp:ht:i:" opt; do	# -r doesn't use an argument
 	case $opt in
 		b)	baseDir="$OPTARG"
 		;;
@@ -59,10 +60,23 @@ while getopts ":b:c:d:rp:t:i:" opt; do	# -r doesn't use an argument
 		t)	tagOrg="$OPTARG" # Common tags for all files in the folder
 			tagOrg=$(echo "$tagOrg" | sed -E "s|(\w+)|'\1\'|g")
 		;;
-		\?)	echoErr "Invalid option -$OPTARG"
+		h)  echo -e "Usage: ./makeMd.sh -b 'Location of .tex files' \t\t\t\t[${GREEN}Default: ${BLUE}$baseDir${NC}\t\t]"
+			echo -e "$align -c 'Location where new files will be created' \t[${GREEN}Default: ${BLUE}$copyDir${NC}\t\t]"
+			echo -e "$align -d 'File creation date in YYYY-mm-dd' \t\t[${GREEN}Default: ${BLUE}$ds${NC}\t\t\t]"
+			echo -e "$align -p 'Location  of post.template' \t\t\t[${GREEN}Default: ${BLUE}$pt${NC}\t\t]"
+			echo -e "$align -t 'Course Name' \t\t\t\t\t[${GREEN}Default: ${RED}NONE${NC} --> Must be set manually\t]"
+			echo -e "$align -i 'Course ID' \t\t\t\t\t[${GREEN}Default: ${RED}NONE${NC} --> Must be set manually\t]"
+			echo -e "$align -r --> Remove all old files in $copyDir (except templates in $pt)."
+			echo -e "$align -h --> Show (this) help message and default settings, then exit."
+			exit
+		;;
+		\?)	echoErr "Invalid option -$OPTARG; Use ./makeMd.sh -h for help!"
 		;;
 	esac
 done
+
+[ -n "$tagOrg" ] || echoErr "Course name must be set before proceeding!"
+[ -n "$courseID" ] || echoErr "Course ID must be set before proceeding!"
 
 echo "Basedir: $baseDir"
 echo "Copydir: $copyDir"
@@ -261,7 +275,7 @@ traverse "$baseDir"
 sed -i "s|  next_article: '<\*nextPointer>'|#  next_article: ''|g" "$fileName" || echoErr "Last file $fileName's next pointer couldn't be set to nil"
 
 # Generating Datafile
-./makeData.sh -c "$tagOrg" -i "$courseID"
+./makeData.sh -c "${tagOrg//\'}" -i "$courseID"	-v	# ${tagOrg//\'} removes the 's from the variable's output
 
 echo "Complete!"
-echoCol 4 "The data to be added to ${YELLOW}_data/courses.yaml${BLUE} file is stored in: " "$datafile"
+# echoCol 4 "The data to be added to ${YELLOW}_data/courses.yaml${BLUE} file is stored in: " "$datafile"
