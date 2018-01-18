@@ -234,7 +234,7 @@ function mkGfm () {
 	baseSlug=$(slugify "$tagOrg")
 	modSlug=$(slugify "$modName")
 	chapSlug=$(slugify "$nameOrg")
-	sed -i "s|'<\*categories>'|\[$baseSlug, '$modSlug', '$chapSlug'\]|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
+	sed -i "s|'<\*categories>'|$baseSlug, '$modSlug', '$chapSlug'|g" "$fileName" || echoErr "Can't Insert MetaData -- tags for $fileName"
 	sed -i "s|<\*lessonID>|$lessonID|g" "$fileName" || echoErr "Can't Insert MetaData -- lessonID for $fileName"
 	sed -i "s|'<\*mod>'|\'$modName\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Mod Name for $fileName"
 	sed -i "s|'<\*chapter>'|\'$nameOrg\'|g" "$fileName" || echoErr "Can't Insert MetaData -- Chapter Name for $fileName"
