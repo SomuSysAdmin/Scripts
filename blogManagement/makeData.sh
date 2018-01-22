@@ -23,7 +23,7 @@ while getopts ":p:c:i:d:t:hv" opt; do	# -h doesn't use an argument
         i)	courseID="$OPTARG"
 		;;
 		d)	# datafile name
-            datafile="$OPTARG.yaml"
+            datafile="$OPTARG"
 		;;
 		p)	postDir="$OPTARG"
 		;;
@@ -62,21 +62,21 @@ function dataMaker() {
 	cp "$pt/courses.template" "$datafile"
 
     baseSlug=$(echo "$course" | slugify)
-    rootNode="  - id: $courseID\n    name: '$course'\n    permalink: '$baseSlug'\n    description: '<*description>'\n    content:"
+    rootNode="- id: $courseID\n  name: '$course'\n  permalink: '/$baseSlug'\n  description: '<*description>'\n  content:"
     echo -e "$rootNode" >> $datafile
 
 	filelist=($(./arrangeLesson.sh -d "$postDir")) # Creates an array with the files in the proper order of posts based on LessonID
 
     for f in "${filelist[@]}"
     do
-        headSpc=$(grep 'title : ' "$f" | sed -E "s|.*: '(.*)'|\1|g") || echoErr "Couldn't extract title from $f"
+      headSpc=$(grep 'title : ' "$f" | sed -E "s|.*: '(.*)'|\1|g") || echoErr "Couldn't extract title from $f"
     	modName=$(grep 'modName: ' "$f" | sed -E "s|.*modName: '(.*)'|\1|g") || echoErr "Couldn't extract modName from $f"
-        modSlug=$(echo "$modName" | slugify)
-        chapName=$(grep 'chapterName: ' "$f" | sed -E "s|.*chapterName: '(.*)'|\1|g") || echoErr "Couldn't extract chapterName from $f"
+      modSlug=$(echo "$modName" | slugify)
+      chapName=$(grep 'chapterName: ' "$f" | sed -E "s|.*chapterName: '(.*)'|\1|g") || echoErr "Couldn't extract chapterName from $f"
     	chapSlug=$(echo "$chapName" | slugify)
-        lessonID=$(grep 'lessonID : ' "$f" | sed -E "s|.*lessonID : (.*)|\1|g") || echoErr "Couldn't extract lessonID from $f"
-        node=$(nodeMaker "$lessonID")
-        echo -e "$node" >> "$datafile" || echoErr "Failed to insert Node to Datafile...\n***DUMP***\n$node\n\nSource:$fDatafile:$datafile"
+      lessonID=$(grep 'lessonID : ' "$f" | sed -E "s|.*lessonID : (.*)|\1|g") || echoErr "Couldn't extract lessonID from $f"
+      node=$(nodeMaker "$lessonID")
+      echo -e "$node" >> "$datafile" || echoErr "Failed to insert Node to Datafile...\n***DUMP***\n$node\n\nSource:$fDatafile:$datafile"
 		echoCol 4 "Added Node for $lessonID. $headSpc"
     done
 }
@@ -85,7 +85,7 @@ function dataMaker() {
 function nodeMaker() {
 	lessonID="$1"
 	# The <*tl> place holder is replaced with a calculated amount of spaces before passing the data to dataMaker for addition.
-	local node="<*tl>  - id: <*id>\n<*tl>    name: '<*name>'\n<*tl>    permalink: '<*permalink>'\n<*tl>    description: '<*description>'\n<*tl>    content:"
+	local node="<*tl>- id: <*id>\n<*tl>  name: '<*name>'\n<*tl>  permalink: '<*permalink>'\n<*tl>  description: '<*description>'\n<*tl>  content: []"
 
 	# Verifying if the any of the required nodes already exist - if not, creating them
 	numMod=$(echo "$lessonID" | sed -E "s|([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+)|\1|g") || echoErr "Error extracting Module # for node-check"
@@ -115,7 +115,7 @@ function nodeCheck() {
 	nodeType="$2"
 	nodePresent=1 # Assuming node won't be present at first.
 
-	local node="<*tl>  - id: <*id>\n<*tl>    name: '<*name>'\n<*tl>    permalink: '<*permalink>'\n<*tl>    description: '<*description>'\n<*tl>    content:"
+	local node="<*tl>- id: <*id>\n<*tl>  name: '<*name>'\n<*tl>  permalink: '<*permalink>'\n<*tl>  description: '<*description>'\n<*tl>  content:"
 	grep -qx ".*id: $courseID.$nodeID" "$datafile"
 	nodePresent=$?	# Stores whether the node search succeded
 	[ $nodePresent -eq 0 ] && return # Search for the nodeID in the datafile, and if found, exit quietly. If not, create a node below.
@@ -141,7 +141,7 @@ function nodeCheck() {
 # Adds required number of tabs to be compatible with Shopify Liquid object syntax
 function tabber() {
 	# Inserting spaces - Critical as liquid requires the proper number of spaces to represent hierarchy
-	tl=$(( 4 * $1 ))
+	tl=$(( 2 * $1 ))
 	local tabs=""
 	while [ $tl -gt 0 ];
 	do
