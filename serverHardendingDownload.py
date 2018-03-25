@@ -11,8 +11,8 @@ sys.setdefaultencoding('utf-8')
 url = 'https://www.safaribooksonline.com/library/view/linux-security-red/9780134598345/'
 domain = 'https://www.safaribooksonline.com'
 output_folder = './ServerHardening'
-username = 'somu.helpisontheway@gmail.com'
-password = 'res0nance'
+username = 'notMyRealEmail@gmail.com'
+password = 'notMyRealPassword'
 count=0
 
 req = requests.get(url)
